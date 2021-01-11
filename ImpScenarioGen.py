@@ -100,6 +100,9 @@ class ImpScenarioGen(ScenarioGen):
     def __iter__(self):
         return self.scenarios.__iter__()
 
+    def get_scenarios(self):
+        return self.scenarios
+
     def decide_imp_cards(self):
         """
             decide at most self.level number of most important cards
