@@ -39,7 +39,7 @@ class ImpNumTable(NumTable):
         return False
 
 class ImpScenarioGen(ScenarioGen):
-    def __init__(self,myseat,history,cards_on_table,cards_list,level=2,num_per_imp=2,imp_cards=None,METHOD1_PREFERENCE=0):
+    def __init__(self,myseat,history,cards_on_table,cards_list,thisuit,level=2,num_per_imp=2,imp_cards=None,METHOD1_PREFERENCE=0):
         """
             myseat, history and cards_on_table will be fed to gen_void_info to get void_info
             history, cards_on_table and cards_list will be fed to gen_cards_remain to get cards_remain
@@ -63,6 +63,7 @@ class ImpScenarioGen(ScenarioGen):
         elif len(cards_on_table)==4: #I am the last one
             self.lens=[len(cards_list)-1,2*len(cards_list)-2,3*len(cards_list)-3]
 
+        self.thisuit=thisuit
         self.level=level
         self.num_per_imp=num_per_imp
         self.imp_cards=imp_cards
@@ -108,10 +109,24 @@ class ImpScenarioGen(ScenarioGen):
             decide at most self.level number of most important cards
             TODO: make this decision adaptive
         """
-        potential_imp_cards=[]
-        if "SQ" in self.cards_remain:
-            potential_imp_cards+=["SQ","SA","SK"]
-        potential_imp_cards+=["HA","C10","HK"]
+        if self.thisuit=="A":
+            potential_imp_cards=[]
+            if "SQ" in self.cards_remain:
+                potential_imp_cards+=["SQ","SA","SK"]
+            if "DJ" in self.cards_remain:
+                potential_imp_cards+=["DJ","DA","DK","DQ"]
+            if True:
+                potential_imp_cards+=["HA","HK","HQ"]
+            if "C10" in self.cards_remain:
+                potential_imp_cards+=["C10","CA","CK","CQ","CJ"]
+        elif self.thisuit=="S":
+            potential_imp_cards=["SQ","SA","SK","SJ","S10"]
+        elif self.thisuit=="H":
+            potential_imp_cards=["HA","HK","HQ","HJ","H10"]
+        elif self.thisuit=="D":
+            potential_imp_cards=["DJ","DA","DK","DQ","D10"]
+        elif self.thisuit=="C":
+            potential_imp_cards=["C10","CA","CK","CQ","CJ"]
 
         imp_cards=[c for c in potential_imp_cards if c in self.cards_remain]
         imp_cards=imp_cards[0:min(self.level,len(imp_cards))]
