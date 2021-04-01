@@ -311,10 +311,12 @@ class ScenarioGen():
         return cards_list_list
 
     def calc_weight(self,vals):
-        w=ScenarioGen.FACTORIAL[self.suit_ct[0]]//(ScenarioGen.FACTORIAL[vals[0]]*ScenarioGen.FACTORIAL[vals[1]]*ScenarioGen.FACTORIAL[vals[2]])
+        """w=ScenarioGen.FACTORIAL[self.suit_ct[0]]//(ScenarioGen.FACTORIAL[vals[0]]*ScenarioGen.FACTORIAL[vals[1]]*ScenarioGen.FACTORIAL[vals[2]])
         w*=ScenarioGen.FACTORIAL[self.suit_ct[1]]//(ScenarioGen.FACTORIAL[vals[3]]*ScenarioGen.FACTORIAL[vals[4]]*ScenarioGen.FACTORIAL[vals[5]])
         w*=ScenarioGen.FACTORIAL[self.suit_ct[2]]//(ScenarioGen.FACTORIAL[vals[6]]*ScenarioGen.FACTORIAL[vals[7]]*ScenarioGen.FACTORIAL[vals[8]])
-        w*=ScenarioGen.FACTORIAL[self.suit_ct[3]]//(ScenarioGen.FACTORIAL[vals[9]]*ScenarioGen.FACTORIAL[vals[10]]*ScenarioGen.FACTORIAL[vals[11]])
+        w*=ScenarioGen.FACTORIAL[self.suit_ct[3]]//(ScenarioGen.FACTORIAL[vals[9]]*ScenarioGen.FACTORIAL[vals[10]]*ScenarioGen.FACTORIAL[vals[11]])"""
+        #排列改成组合
+        w=ScenarioGen.FACTORIAL[self.suit_ct[0]]*ScenarioGen.FACTORIAL[self.suit_ct[1]]*ScenarioGen.FACTORIAL[self.suit_ct[2]]*ScenarioGen.FACTORIAL[self.suit_ct[3]]
         return w
 
     def gen_num_tables(self):
