@@ -376,7 +376,6 @@ class ScenarioGen():
                     c_cases.append((player1,player2,player3))
             self.exhaustive+=[[list(s[0]+h[0]+d[0]+c[0]),list(s[1]+h[1]+d[1]+c[1]),s[2]+h[2]+d[2]+c[2]]\
                              for s,h,d,c in itertools.product(s_cases,h_cases,d_cases,c_cases)]
-        assert len(self.exhaustive)==self.num_table_count
         #log("exhaust: %d cases, %s\n%s\n%s\n%s"%(self.num_table_count,self.cards_remain,self.void_info,self.num_tables,self.exhaustive))
         #input()
 
